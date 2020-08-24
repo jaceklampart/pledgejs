@@ -166,7 +166,7 @@ let processCounts = counts => {
     }
 
     let newRow = [
-      fileData[fileId].name,
+      `<a href='${fileData[fileId].link}' target='_blank'>${fileData[fileId].name}</a>`,
       maxDate,
       editCount,
       percentYou,
@@ -207,7 +207,8 @@ let processCounts = counts => {
   let tableChart = new google.visualization.Table(document.getElementById('table_chart_div'));
   tableChart.draw(dataTable, {
     showRowNumber: true,
-    sortColumn: 0
+    sortColumn: 0,
+    allowHtml: true
   });
 };
 
@@ -247,7 +248,8 @@ login(API_KEY, CLIENT_ID, APIS)
 
   resp.result.files.forEach(file => {
     fileData[file.id] = {
-      'name': file.name
+      'name': file.name,
+      'link': file.webViewLink
     };
   });
 
